@@ -10,12 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from pathlib import Path
-from dotenv import load_dotenv
 import os
+from pathlib import Path
 
-import raldirectory.aircraft.apps
-import raldirectory.aircrew.apps
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -45,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'raldirectory.aircraft.apps.AircraftConfig',
-    'raldirectory.aircrew.apps.AircrewConfig',
+    'aircraft.apps.AircraftConfig',
+    'aircrew.apps.AircrewConfig',
 ]
 
 MIDDLEWARE = [
