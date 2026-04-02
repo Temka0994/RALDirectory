@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="welcome-box">
+    <div>24 лютого 2022 року близько 4-ї ранку життя мільйонів українців розділилося на «до» та «після». Оголошена
+        президентом РФ «військова операція» стала початком повномасштабного вторгнення, що принесло війну в кожну
+        частину нашої країни. На українську землю рушила регулярна армія, а повітряний простір порушили ворожі ракети,
+        літаки та гелікоптери.
+    </div>
+    <div>
+        Наразі триває {{ day_of_war }}-й день повномасштабного вторгнення. Цей ресурс створений, щоб зафіксувати ціну агресії
+        для окупантів. Тут зібрано докази знищення авіаційної техніки та екіпажів РФ — тих, хто прийшов руйнувати, але
+        натомість знайшов тут свій кінець.
+    </div>
+</div>
+<div class="last-updates">
+    {% for aircraft in last_updates %}
+        <div class="aircraft-card">
+            <div class="update-image-wrapper">
+                {% with aircraft.aircraftphoto_set.first as photo %}
+                    {% if photo %}
+                        <img src="{{ photo.image.url }}" class="update-image" alt="{{ aircraft.model }}">
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="update-content">
+                <span class="update-status">{{ aircraft.get_status_display }}</span>
+                <div class="update-title">{{ aircraft.model }}</div>
+                <div class="update-date">{{ aircraft.date|date:"d.m.Y" }}</div>
+                <div class="update-description">{{ aircraft.description|truncatechars:120 }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
