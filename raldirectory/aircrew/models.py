@@ -6,10 +6,13 @@ class Rank(models.Model):
     name = models.CharField(max_length=25, verbose_name="Звання")
     order = models.IntegerField(verbose_name="Цінність звання")
 
+    def __str__(self):
+        return self.name
+
 
 class Aircrew(models.Model):
-    first_name = models.CharField(max_length=25, verbose_name="Ім'я")
     last_name = models.CharField(max_length=25, verbose_name="Прізвище")
+    first_name = models.CharField(max_length=25, verbose_name="Ім'я")
     middle_name = models.CharField(max_length=25, null=True, blank=True, verbose_name="По-батькові")
     rank = models.ForeignKey(Rank, on_delete=models.SET_NULL, null=True, verbose_name="Звання")
     date_of_birth = models.DateField(null=True, blank=True, verbose_name="Дата народження")
@@ -17,7 +20,13 @@ class Aircrew(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name="Інформація")
     photo = CloudinaryField('image', null=True, blank=True)
 
+    def __str__(self):
+        return f'{self.last_name} {self.first_name} {self.middle_name}'
+
 
 class AircraftCrew(models.Model):
     aircraft = models.ForeignKey("aircraft.Aircraft", on_delete=models.CASCADE, verbose_name="Борт")
     aircrew_member = models.ForeignKey(Aircrew, on_delete=models.CASCADE, verbose_name="Член екіпажу")
+
+    def __str__(self):
+        return f'{self.aircrew_member.last_name} {self.aircrew_member.first_name} ({self.aircraft.model} {self.aircraft.tail_number} "{self.aircraft.tail_color}")'
