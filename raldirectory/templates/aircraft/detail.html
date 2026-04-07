@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="detail-layout">
+    <div class="detail-gallery">
+        {% with photos=aircraft.aircraftphoto_set.all %}
+        {% if photos %}
+        <div class="gallery-main">
+            <img id="main-photo" src="{{ photos.0.image.url }}" class="gallery-aircraft-photo"
+                 alt="{{ aircraft.model }}">
+        </div>
+        {% if photos|length > 1 %}
+        <div class="gallery-thumbs">
+            {% for photo in photos %}
+            <img src="{{ photo.image.url }}" class="gallery-thumb" alt="{{ aircraft.model }}"
+                 onclick="setPhoto(this)">
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="gallery-no-photo">
+            Фото відсутнє.
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+    <div class="detail-card">
+        <div class="detail-aircraft">
+            {{ aircraft.model }}
+        </div>
+        <div class="update-status status-{{ aircraft.status }}">
+            {{ aircraft.get_status_display }}
+        </div>
+        <div class="details">
+            <div class="detail-fields">
+                {% if aircraft.date %}
+                <div class="detail-field">
+                    <span class="detail-label"> Дата </span>
+                    <span class="detail-value"> {{ aircraft.date|date:"d.m.y" }} </span>
+                </div>
+                {% endif %}
+
+                {% if aircraft.tail_number and aircraft.tail_color %}
+                <div class="detail-field">
+                    <span class="detail-label"> Бортовий номер </span>
+                    <span class="detail-value"> {{ aircraft.tail_number }} ({{ aircraft.get_tail_color_display }}) </span>
+                </div>
+                {% endif %}
+
+                {% if aircraft.register_number %}
+                <div class="detail-field">
+                    <span class="detail-label"> Реєстраційний номер </span>
+                    <span class="detail-value"> {{ aircraft.register_number }} </span>
+                </div>
+                {% endif %}
+
+                {% if aircraft.serial_number %}
+                <div class="detail-field">
+                    <span class="detail-label"> Серійний номер </span>
+                    <span class="detail-value"> {{ aircraft.serial_number }} </span>
+                </div>
+                {% endif %}
+
+                {% if aircraft.subdivision %}
+                <div class="detail-field">
+                    <span class="detail-label"> Підрозділ </span>
+                    <span class="detail-value"> {{ aircraft.subdivision }} </span>
+                </div>
+                {% endif %}
+
+                {% if aircraft.location %}
+                <div class="detail-field">
+                    <span class="detail-label"> Локація </span>
+                    <span class="detail-value"> {{ aircraft.location }} </span>
+                </div>
+                {% endif %}
+            </div>
+            {% if aircraft.description %}
+            <span class="detail-description"> {{ aircraft.description }} </span>
+            {% endif %}
+            <div class="detail-crew">
+                {% with crew=aircraft.aircraftcrew_set.all %}
+                {% if crew %}
+                <div class="section-label">Екіпаж</div>
+                <div class="crew-list">
+                    {% for member in crew %}
+                    <div class="crew-member">
+                        {% if member.aircrew_member.photo %}
+                        <img src="{{ member.aircrew_member.photo.url }}" class="crew-photo" alt="">
+                        {% else %}
+                        <div class="crew-photo crew-no-photo"></div>
+                        {% endif %}
+                        <div class="crew-information">
+                            <div class="crew-name">
+                                {{ member.aircrew_member.last_name}}
+                                {{ member.aircrew_member.first_name}}
+                                {% if member.aircrew_member.middle_name %}
+                                {{ member.aircrew_member.middle_name }}
+                                {% endif %}
+                            </div>
+                            {% if member.aircrew_member.rank %}
+                            <div class="crew-rank">
+                                {{ member.aircrew_member.rank }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function setPhoto(element) {
+        document.getElementById('main-photo').src = element.src;
+        document.querySelectorAll('.gallery-thumb').forEach(photo => photo.classList.remove('active'));
+        element.classList.add('active')
+
+    }
+</script>
+
+{% endblock content %}

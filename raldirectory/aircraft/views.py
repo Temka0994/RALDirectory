@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from aircraft.models import Aircraft
 
-# Create your views here.
+
+def aircraft_detail(request, pk):
+    aircraft = get_object_or_404(Aircraft, pk=pk)
+    return render(request, "aircraft/detail.html", {'aircraft': aircraft})
