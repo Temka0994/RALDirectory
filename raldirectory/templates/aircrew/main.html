@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="aircrew-losses">
+    <div class="page-title">Загинувші екіпажі</div>
+    <div class="aircrew-grid">
+        {% for aircrew in page_obj %}
+        <a href="#">
+            <div class="aircrew-card">
+                {% if aircrew.photo %}
+                <img src="{{ aircrew.photo.url }}" class="aircrew-image"
+                     alt="{{ aircrew.last_name }} {{ aircrew.first_name }}">
+                {% else %}
+                <div class="aircrew-image"></div>
+                {% endif %}
+                <div class="aircrew-body">
+                    <div class="aircrew-name">
+                        {{ aircrew.last_name }} {{ aircrew.first_name }} {{ aircrew.middle_name }}
+                    </div>
+                    {% if aircrew.rank %}
+                    <div class="aircrew-rank">{{ aircrew.rank.name }}</div>
+                    {% endif %}
+                    {% if aircrew.date_of_death %}
+                    <div class="aircrew-dates">
+                        <span class="death-cross">†</span> {{ aircrew.date_of_death|date:"d.m.Y" }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

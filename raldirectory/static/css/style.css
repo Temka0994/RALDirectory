@@ -574,3 +574,74 @@ a {
     display: block;
     background: #f0ECE5;
 }
+
+.aircrew-losses {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.aircrew-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: stretch;
+}
+
+.aircrew-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #FFFFFF;
+    border: 1px solid #E8E2D9;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    text-align: center;
+    cursor: pointer;
+}
+
+.aircrew-card:hover {
+    border-color: #EA580C;
+    transform: translateY(-2px);
+}
+
+.aircrew-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    background: #F0ECE5;
+}
+
+.aircrew-body {
+    padding: 14px 16px 16px;
+    border-top: 1px solid #F0ECE5;
+    flex: 1;
+}
+
+.aircrew-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1A1A1A;
+    line-height: 1.4;
+}
+
+.aircrew-rank {
+    font-size: 11px;
+    color: #BBBBBB;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.aircrew-dates {
+    font-size: 11px;
+    color: #CCCCCC;
+    margin-top: 6px;
+}
+
+.aircrew-dates .death-cross {
+    color: #EA580C;
+}
