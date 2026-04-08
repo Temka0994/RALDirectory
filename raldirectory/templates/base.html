@@ -16,9 +16,10 @@
         </div>
         <nav class="navbar">
             <ul>
-                <li><a>Search</a></li>
-                <li><a>Test</a></li>
-                <li><a>Language</a></li>
+                <li><a>Пошук</a></li>
+                <li><a href="{% url 'aircraft_main' %}">Техніка</a></li>
+                <li><a>Екіпажі</a></li>
+                <li><a>Мова</a></li>
             </ul>
         </nav>
     </header>
@@ -28,10 +29,7 @@
         {% endblock content %}
     </main>
 
-    <div class="pagination">
-        {% block pagination %}
-        {% endblock pagination %}
-    </div>
+    {% include "pagination.html" %}
 
     <footer class="footer">
         <div>

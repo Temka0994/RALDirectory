@@ -2,11 +2,6 @@ from cloudinary.models import CloudinaryField
 from django.db import models
 
 
-class AircraftType(models.TextChoices):
-    HELICOPTER = "HELICOPTER", "Гелікоптер"
-    PLANE = "PLANE", "Літак"
-
-
 class TailColor(models.TextChoices):
     BLUE = "BLUE", "Синій"
     RED = "RED", "Червоний"
@@ -36,9 +31,19 @@ class AircraftModel(models.Model):
         return self.name
 
 
+class AircraftType(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Назва")
+    category = models.CharField(max_length=20,
+                                choices=[("PLANE", "Літак"), ("HELICOPTER", "Гелікоптер"), ],
+                                verbose_name="Категорія")
+
+    def __str__(self):
+        return self.name
+
+
 class Aircraft(models.Model):
-    type = models.CharField(max_length=15, choices=AircraftType.choices, verbose_name="Тип")
-    model = models.ForeignKey(AircraftModel, on_delete=models.SET_NULL, null=True, verbose_name="Модель")
+    type = models.ForeignKey(AircraftType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Тип")
+    model = models.ForeignKey(AircraftModel, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Модель")
     tail_number = models.CharField(max_length=5, null=True, blank=True, verbose_name="Бортовий номер")
     tail_color = models.CharField(max_length=10, choices=TailColor.choices, null=True, blank=True,
                                   verbose_name="Колір бортового номеру")

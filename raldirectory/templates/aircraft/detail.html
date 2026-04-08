@@ -76,12 +76,14 @@
                 </div>
                 {% endif %}
             </div>
+
             {% if aircraft.description %}
             <span class="detail-description"> {{ aircraft.description }} </span>
             {% endif %}
+
+            {% with crew=aircraft.aircraftcrew_set.all %}
+            {% if crew %}
             <div class="detail-crew">
-                {% with crew=aircraft.aircraftcrew_set.all %}
-                {% if crew %}
                 <div class="section-label">Екіпаж</div>
                 <div class="crew-list">
                     {% for member in crew %}

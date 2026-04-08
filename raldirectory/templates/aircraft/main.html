@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="aircraft-losses">
+    <div class="page-title">Втрати техніки</div>
+    {% for aircraft in page_obj %}
+    <a href="{% url 'aircraft_detail' aircraft.pk %}">
+        <div class="aircraft-card">
+            <div class="list-aircraft-image">
+                {% with aircraft.aircraftphoto_set.first as photo %}
+                {% if photo %}
+                <img src="{{ photo.image.url }}" class="aircraft-image" alt="{{ aircraft.model }}">
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="update-content">
+                <span class="update-status status-{{ aircraft.status }}">
+                    {{ aircraft.get_status_display }}
+                </span>
+                <div class="update-title">{{ aircraft.model }}</div>
+                <div class="update-date">{{ aircraft.date|date:"d.m.Y" }}</div>
+                <div class="update-description">{{ aircraft.description|truncatechars:120 }}</div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock content %}

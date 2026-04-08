@@ -16,12 +16,14 @@
 </div>
 
 <div class="last-updates">
+    <div class="page-title">Останні втрати</div>
     {% for aircraft in last_updates %}
+    <a href="{% url 'aircraft_detail' aircraft.pk %}">
         <div class="aircraft-card">
             <div class="update-image-wrapper">
                 {% with aircraft.aircraftphoto_set.first as photo %}
                     {% if photo %}
-                        <img src="{{ photo.image.url }}" class="update-image" alt="{{ aircraft.model }}">
+                    <img src="{{ photo.image.url }}" class="update-image" alt="{{ aircraft.model }}">
                     {% endif %}
                 {% endwith %}
             </div>
@@ -34,6 +36,7 @@
                 <div class="update-description">{{ aircraft.description|truncatechars:120 }}</div>
             </div>
         </div>
+    </a>
     {% endfor %}
 </div>
 {% endblock content %}

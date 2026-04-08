@@ -94,10 +94,10 @@ body {
     border-radius: 0 10px 10px 0;
     background: #FFFFFF;
     padding: 22px 26px;
-    margin-bottom: 28px;
     display: flex;
     flex-direction: column;
     gap: 14px;
+    margin-bottom: 12px;
 }
 
 .welcome-box p,
@@ -458,4 +458,119 @@ body {
     font-size: 11px;
     color: #BBBBBB;
     margin-top: 2px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.page-title {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    color: #EA580C;
+    letter-spacing: 1px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.aircraft-losses {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.page-title {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    color: #EA580C;
+    letter-spacing: 1px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 24px 28px;
+    background-color: #FFFFFF;
+    border: 1px solid #E8E2D9;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.pagination a,
+.step-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #888888;
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pagination a:hover {
+    background-color: #F5F3EF;
+    color: #1A1A1A;
+    border-color: #E8E2D9;
+}
+
+.pagination a.arrow:hover {
+    color: #EA580C;
+    background-color: #FFF5F0;
+    border-color: #FBCFB8;
+}
+
+.pagination a.arrow {
+    font-size: 15px;
+    color: #AAAAAA;
+}
+
+.pagination .current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #EA580C;
+    color: #FFFFFF;
+    border: 1px solid #EA580C;
+}
+
+.pagination .disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.pagination .pg-info {
+    padding: 0 8px;
+}
+
+.list-aircraft-image {
+    flex-shrink: 0;
+    width: 200px;
+}
+
+.aircraft-image {
+    width: 200px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    background: #f0ECE5;
 }
