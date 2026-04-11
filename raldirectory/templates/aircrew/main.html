@@ -4,9 +4,26 @@
 {% block content %}
 <div class="aircrew-losses">
     <div class="page-title">Загинувші екіпажі</div>
+
+    <form method="get" class="search-form">
+        <div class="search-row">
+            <input type="text" name="q" value="{{ q }}" placeholder="Пошук за прізвищем..." class="search-input">
+            <select name="rank" class="search-select">
+                <option value="">Всі звання</option>
+                {% for rank in ranks %}
+                <option value="{{ rank.pk }}" {% if selected_rank == rank.pk|stringformat:"s" %}selected{% endif %}>{{ rank.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="search-btn">Знайти</button>
+            {% if q or selected_rank %}
+            <a href="{% url 'aircrew_main' %}" class="search-reset">Скинути</a>
+            {% endif %}
+        </div>
+    </form>
+
     <div class="aircrew-grid">
         {% for aircrew in page_obj %}
-        <a href="#">
+        <a href="{% url 'aircrew_detail' aircrew.pk %}">
             <div class="aircrew-card">
                 {% if aircrew.photo %}
                 <img src="{{ aircrew.photo.url }}" class="aircrew-image"

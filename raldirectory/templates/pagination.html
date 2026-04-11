@@ -1,8 +1,8 @@
 {% if page_obj.paginator.num_pages > 1 %}
 <div class="pagination">
     {% if page_obj.has_previous %}
-        <a href="?page=1" class="arrow">&#8592;</a>
-        <a href="?page={{ page_obj.previous_page_number }}" class="arrow">&#10094;</a>
+<a href="?page=1&q={{ request.GET.q }}&status={{ request.GET.status }}&type={{ request.GET.type }}&rank={{ request.GET.rank }}" class="arrow">&#8592;</a>
+    <a href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}&status={{ request.GET.status }}&type={{ request.GET.type }}&rank={{ request.GET.rank }}" class="arrow">&#10094;</a>
     {% else %}
         <span class="arrow disabled">&#8592;</span>
         <span class="arrow disabled">&#10094;</span>
@@ -11,8 +11,8 @@
     <span class="pg-info">Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}</span>
 
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="arrow">&#10095;</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}" class="arrow">&#8594;</a>
+        <a href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}&status={{ request.GET.status }}&type={{ request.GET.type }}&rank={{ request.GET.rank }}"" class="arrow">&#10095;</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q }}&status={{ request.GET.status }}&type={{ request.GET.type }}&rank={{ request.GET.rank }}"" class="arrow">&#8594;</a>
     {% else %}
         <span class="arrow disabled">&#10095;</span>
         <span class="arrow disabled">&#8594;</span>

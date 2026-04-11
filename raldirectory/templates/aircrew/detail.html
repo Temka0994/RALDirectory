@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="detail-layout">
+
+    <div class="detail-gallery" style="width:280px; flex-shrink:0;">
+        {% if aircrew.photo %}
+        <img src="{{ aircrew.photo.url }}" class="gallery-aircrew-photo"
+             alt="{{ aircrew.last_name }} {{ aircrew.first_name }}">
+        {% else %}
+        <div class="gallery-no-photo">Фото відсутнє</div>
+        {% endif %}
+    </div>
+
+    <div class="detail-card">
+        <div>
+            <div class="detail-name">
+                {{ aircrew.last_name }} {{ aircrew.first_name }} {{ aircrew.middle_name }}
+            </div>
+            {% if aircrew.rank %}
+            <div style="margin-top:6px;">
+                <span class="update-status status-default">{{ aircrew.rank.name }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="detail-fields">
+            <div class="detail-field">
+                <span class="detail-label">Прізвище</span>
+                <span>{{ aircrew.last_name }}</span>
+            </div>
+            <div class="detail-field">
+                <span class="detail-label">Ім'я</span>
+                <span>{{ aircrew.first_name }}</span>
+            </div>
+            {% if aircrew.middle_name %}
+            <div class="detail-field">
+                <span class="detail-label">По-батькові</span>
+                <span>{{ aircrew.middle_name }}</span>
+            </div>
+            {% endif %}
+            {% if aircrew.rank %}
+            <div class="detail-field">
+                <span class="detail-label">Звання</span>
+                <span>{{ aircrew.rank.name }}</span>
+            </div>
+            {% endif %}
+            {% if aircrew.date_of_birth %}
+            <div class="detail-field">
+                <span class="detail-label">Дата народження</span>
+                <span>{{ aircrew.date_of_birth|date:"d.m.Y" }}</span>
+            </div>
+            {% endif %}
+            {% if aircrew.date_of_death %}
+            <div class="detail-field">
+                <span class="detail-label">Дата смерті</span>
+                <span class="detail-value death">{{ aircrew.date_of_death|date:"d.m.Y" }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if aircrew.description %}
+        <div class="detail-description">
+            <div class="section-label">Інформація</div>
+            {{ aircrew.description }}
+        </div>
+        {% endif %}
+
+        {% with aircrew.aircraftcrew_set.all as flights %}
+        {% if flights %}
+        <div class="detail-crew">
+            <div class="section-label">Борти</div>
+            <div class="crew-list">
+                {% for f in flights %}
+                <a href="{% url 'aircraft_detail' f.aircraft.pk %}" class="crew-member">
+                    <div>
+                        <div class="crew-name">{{ f.aircraft.model }}</div>
+                        <div class="crew-rank">
+                            {{ f.aircraft.tail_number }}
+                            {% if f.aircraft.tail_color %} · {{ f.aircraft.get_tail_color_display }}{% endif %}
+                        </div>
+                    </div>
+                    <span class="update-status status-{{ f.aircraft.status }}" style="margin-left:auto;">
+                        {{ f.aircraft.get_status_display }}
+                    </span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock content %}

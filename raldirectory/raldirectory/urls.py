@@ -9,5 +9,5 @@ urlpatterns = [
     path('aircraft/', include("aircraft.urls")),
     path('aircrafts/', aircraft_main, name='aircraft_main'),
     path('aircrew/', include("aircrew.urls")),
-    path('aicrews/', aircrew_main, name='aircrew_main'),
+    path('aircrews/', aircrew_main, name='aircrew_main'),
 ]
