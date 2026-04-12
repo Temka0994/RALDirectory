@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'raldirectory.urls'
+ROOT_URLCONF = 'lora.urls'
 
 TEMPLATES = [
     {
@@ -63,13 +63,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'raldirectory.context_processors.war_day'
+                'lora.context_processors.war_day'
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'raldirectory.wsgi.application'
+WSGI_APPLICATION = 'lora.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
